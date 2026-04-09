@@ -12,6 +12,7 @@ target_link_libraries(bcas
     $<BUILD_INTERFACE:bsrvcore::bsrvcore>
     $<INSTALL_INTERFACE:bsrvcore::bsrvcore>
   PRIVATE
+    bcas_project_warnings
     ${BCAS_PUGIXML_TARGET}
 )
 target_include_directories(bcas

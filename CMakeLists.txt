@@ -23,16 +23,23 @@ if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
 
-if(MSVC)
-  add_compile_options(/W4)
-else()
-  add_compile_options(-Wall -Wextra -Wpedantic -Werror)
-endif()
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
+
+add_library(bcas_project_warnings INTERFACE)
+
+if(MSVC)
+  target_compile_options(bcas_project_warnings INTERFACE /W4)
+else()
+  target_compile_options(bcas_project_warnings INTERFACE
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Werror
+  )
+endif()
 
 option(BCAS_BUILD_EXAMPLES "Build bcas examples. Default: ON" ON)
 option(BCAS_BUILD_TESTS "Build bcas tests. Default: OFF" OFF)

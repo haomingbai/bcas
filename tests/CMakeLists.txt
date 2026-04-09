@@ -13,6 +13,7 @@ function(bcas_add_test target_name source_file label)
   target_link_libraries(${target_name}
     PRIVATE
       bcas
+      bcas_project_warnings
       GTest::gtest_main
       GTest::gmock
   )
