@@ -1,0 +1,6 @@
+bcas_add_test(unit_cas_proxy_callback_test
+  unit_cas_proxy_callback_test.cc unit)
+bcas_add_test(unit_cas_client_task_test
+  unit_cas_client_task_test.cc unit)
+bcas_add_test(integration_cas_task_flow_test
+  integration_cas_task_flow_test.cc integration)

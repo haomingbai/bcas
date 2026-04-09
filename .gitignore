@@ -1,0 +1,21 @@
+# Ignore the build directory of the project.
+*build*/
+
+# Ignore the clangd cache and vscode project file.
+.cache/
+.vscode/
+
+# Ignore the benchmark plotting virtual environment.
+.venv-benchmark/
+
+# Ignore generated benchmark artifacts.
+.artifacts/
+
+# Ignore the IDEA project files.
+.idea/
+
+# Ignore AI file
+.codex
+
+# Ignore the standalone boai repository kept beside bsrvcore sources.
+boai/

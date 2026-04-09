@@ -1,0 +1,1 @@
+add_subdirectory(cas_validate_demo)
