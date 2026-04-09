@@ -28,18 +28,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-add_library(bcas_project_warnings INTERFACE)
-
-if(MSVC)
-  target_compile_options(bcas_project_warnings INTERFACE /W4)
-else()
-  target_compile_options(bcas_project_warnings INTERFACE
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Werror
-  )
-endif()
+function(bcas_apply_project_warnings target_name)
+  if(MSVC)
+    target_compile_options(${target_name} PRIVATE /W4)
+  else()
+    target_compile_options(${target_name} PRIVATE
+      -Wall
+      -Wextra
+      -Wpedantic
+      -Werror
+    )
+  endif()
+endfunction()
 
 option(BCAS_BUILD_EXAMPLES "Build bcas examples. Default: ON" ON)
 option(BCAS_BUILD_TESTS "Build bcas tests. Default: OFF" OFF)
@@ -169,6 +169,7 @@ if(NOT TARGET pugixml::static AND NOT TARGET pugixml::pugixml)
       "${CMAKE_CURRENT_BINARY_DIR}/_deps/pugixml-build"
     )
     set(BUILD_SHARED_LIBS "${BCAS_SAVED_BUILD_SHARED_LIBS}" CACHE BOOL "" FORCE)
+    set(BCAS_PUGIXML_SOURCE_ROOT "${BCAS_PUGIXML_SOURCE_DIR}")
     if(TARGET pugixml::static OR TARGET pugixml::pugixml)
       set(BCAS_PUGIXML_RESOLUTION_MODE
           "source:${BCAS_PUGIXML_SOURCE_DIR}")
@@ -190,6 +191,7 @@ if(NOT TARGET pugixml::static AND NOT TARGET pugixml::pugixml)
     )
     FetchContent_MakeAvailable(pugixml)
     set(BUILD_SHARED_LIBS "${BCAS_SAVED_BUILD_SHARED_LIBS}" CACHE BOOL "" FORCE)
+    set(BCAS_PUGIXML_SOURCE_ROOT "${pugixml_SOURCE_DIR}")
     if(TARGET pugixml::static OR TARGET pugixml::pugixml)
       set(BCAS_PUGIXML_RESOLUTION_MODE
           "fetch:${BCAS_PUGIXML_GIT_REPOSITORY}@${BCAS_PUGIXML_GIT_TAG}")

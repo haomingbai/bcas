@@ -13,7 +13,6 @@ function(bcas_add_test target_name source_file label)
   target_link_libraries(${target_name}
     PRIVATE
       bcas
-      bcas_project_warnings
       GTest::gtest_main
       GTest::gmock
   )
@@ -21,6 +20,7 @@ function(bcas_add_test target_name source_file label)
     PRIVATE
       ${PROJECT_SOURCE_DIR}/tests/support
   )
+  bcas_apply_project_warnings(${target_name})
 
   add_test(NAME ${target_name} COMMAND ${target_name})
   set_tests_properties(${target_name} PROPERTIES LABELS ${label})

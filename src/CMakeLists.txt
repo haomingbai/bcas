@@ -4,6 +4,13 @@ add_library(bcas
   ${CMAKE_CURRENT_SOURCE_DIR}/client/cas_proxy_task.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/client/cas_proxy_callback.cc
 )
+
+if(BCAS_PUGIXML_SOURCE_ROOT)
+  target_sources(bcas PRIVATE
+    ${BCAS_PUGIXML_SOURCE_ROOT}/src/pugixml.cpp
+  )
+endif()
+
 add_library(bcas::bcas ALIAS bcas)
 
 target_compile_features(bcas PUBLIC cxx_std_20)
@@ -11,9 +18,6 @@ target_link_libraries(bcas
   PUBLIC
     $<BUILD_INTERFACE:bsrvcore::bsrvcore>
     $<INSTALL_INTERFACE:bsrvcore::bsrvcore>
-  PRIVATE
-    bcas_project_warnings
-    ${BCAS_PUGIXML_TARGET}
 )
 target_include_directories(bcas
   PUBLIC
@@ -22,6 +26,21 @@ target_include_directories(bcas
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+if(BCAS_PUGIXML_SOURCE_ROOT)
+  target_include_directories(bcas PRIVATE
+    ${BCAS_PUGIXML_SOURCE_ROOT}/src
+  )
+elseif(BUILD_SHARED_LIBS)
+  target_link_libraries(bcas PRIVATE ${BCAS_PUGIXML_TARGET})
+elseif(TARGET ${BCAS_PUGIXML_TARGET})
+  message(FATAL_ERROR
+    "Static bcas builds require pugixml source availability so pugixml can be "
+    "embedded privately. Use BCAS_PUGIXML_SOURCE_DIR or BCAS_FETCH_PUGIXML."
+  )
+endif()
+
+bcas_apply_project_warnings(bcas)
 
 set_target_properties(bcas PROPERTIES
   VERSION ${PROJECT_VERSION}

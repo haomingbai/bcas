@@ -2,7 +2,7 @@ add_executable(example_bcas_cas_validate_demo
   cas_validate_demo.cc
 )
 target_link_libraries(example_bcas_cas_validate_demo PRIVATE bcas)
-target_link_libraries(example_bcas_cas_validate_demo PRIVATE bcas_project_warnings)
+bcas_apply_project_warnings(example_bcas_cas_validate_demo)
 
 set_target_properties(example_bcas_cas_validate_demo PROPERTIES
   OUTPUT_NAME cas-validate-demo
