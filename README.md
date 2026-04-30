@@ -3,9 +3,9 @@
 `bcas` is a standalone CAS client library built on top of `bsrvcore`
 client APIs.
 
-The current `bcas` implementation has been verified to build against
-`bsrvcore` `v0.14.0` through `v0.16.0`. When `bcas` auto-fetches `bsrvcore`,
-it now defaults to `v0.16.0`.
+The current `bcas` implementation has been verified to build and pass its
+unit/integration test suite against `bsrvcore` `v0.14.0` through `v0.18.2`.
+When `bcas` auto-fetches `bsrvcore`, it now defaults to `v0.18.2`.
 
 It ships as a normal CMake package:
 
@@ -57,7 +57,7 @@ You can override fetched refs:
 
 ```bash
 cmake -S . -B build \
-  -DBCAS_BSRVCORE_GIT_TAG=v0.16.0 \
+  -DBCAS_BSRVCORE_GIT_TAG=v0.18.2 \
   -DBCAS_PUGIXML_GIT_TAG=v1.15
 ```
 

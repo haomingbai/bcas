@@ -12,6 +12,9 @@ This chapter maps to:
 `bcas::client` wraps `bsrvcore::HttpClientTask` into CAS-specific one-shot
 tasks that build the right URLs, parse XML, and report a single typed result.
 
+The current `bcas` tree has been verified to build and pass its
+unit/integration test suite against `bsrvcore` `v0.14.0` through `v0.18.2`.
+
 ## Data model
 
 - `CasClientParams`: one validation request

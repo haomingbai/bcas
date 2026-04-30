@@ -61,7 +61,7 @@ set(BCAS_BSRVCORE_SOURCE_DIR "" CACHE PATH
 set(BCAS_BSRVCORE_GIT_REPOSITORY "https://github.com/haomingbai/bsrvcore.git"
   CACHE STRING "Git repository used when bcas fetches bsrvcore."
 )
-set(BCAS_BSRVCORE_GIT_TAG "v0.16.0"
+set(BCAS_BSRVCORE_GIT_TAG "v0.18.2"
   CACHE STRING "Git ref used when bcas fetches bsrvcore."
 )
 
